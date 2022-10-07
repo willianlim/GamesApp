@@ -1,15 +1,26 @@
 package com.spring.gamesapp.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tbl_game")
 public class Game {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String titulo;
+
     private String produtora;
+
     private boolean zerado;
+
     private int nota;
+
     private String console;
+
 
     public Long getId() {
         return id;
