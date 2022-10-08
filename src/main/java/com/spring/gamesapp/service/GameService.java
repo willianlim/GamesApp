@@ -2,6 +2,7 @@ package com.spring.gamesapp.service;
 
 import com.spring.gamesapp.model.Game;
 import com.spring.gamesapp.repository.GameRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,14 @@ public class GameService {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable Long id) {
         gameRepository.deleteById(id);
+    }
+
+    @PutMapping("/api/games/{id}")
+    public Game atualizar(@PathVariable Long id, @RequestBody Game game) {
+        Game gameAtual = gameRepository.findById(id).get();
+
+        BeanUtils.copyProperties(game, gameAtual, "id");
+        return gameRepository.save(gameAtual);
     }
 
 }
