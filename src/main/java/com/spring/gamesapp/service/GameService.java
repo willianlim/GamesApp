@@ -35,4 +35,11 @@ public class GameService {
     public Game save(@RequestBody Game game) {
         return gameRepository.save(game);
     }
+
+    @DeleteMapping("/api/games/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluir(@PathVariable Long id) {
+        gameRepository.deleteById(id);
+    }
+
 }
